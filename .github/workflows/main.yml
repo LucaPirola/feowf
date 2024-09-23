@@ -1,0 +1,21 @@
+name: deploy to Altervista
+
+on:
+  push:
+    branches:
+    -master
+
+    jons:
+      deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: Checkout code
+        uses: action/checkout@v2
+
+        -name: deploy to Altervista
+        uses: samkirkland/FTP-deploy-action@v4.3.4
+        with:
+          server: ${{secret.FTP_USERNAME}}
+          password: ${{ secret.FTP_PASSWORD}}
+          local-dir: ./
